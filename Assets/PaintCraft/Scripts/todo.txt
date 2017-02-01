@@ -1,8 +1,12 @@
+play skin is empty
+skin not saving
 
-
+remove app permissions
 Icon from Ella
 ScreenShots
 app store desccription
 video
 create Google InApp purchase
 InApp PUrchases .99cents
+apple developer account
+iphone build test and upload
