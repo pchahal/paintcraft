@@ -77,9 +77,12 @@ public class Actions : MonoBehaviour
         pixelUV.x *= tex.width;
         pixelUV.y *= tex.height;
 
-        currentColor = tex.GetPixel((int)pixelUV.x, (int)pixelUV.y);
-        if (currentColor.a > .9f)
+        Color newColor = tex.GetPixel((int)pixelUV.x, (int)pixelUV.y);
+        if (newColor.a > .9f)
+        {
+            currentColor = newColor;
             GameObject.Find("ColorSwatches").GetComponent<ColorSwatch>().OnChangeSwatchColor(currentColor);
+        }
     }
 
     static private List<Rect> GetTextureRects(BodyPart bodyPart)

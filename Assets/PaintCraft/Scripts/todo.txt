@@ -1,5 +1,4 @@
-play skin is empty
-skin not saving
+
 
 remove app permissions
 Icon from Ella
