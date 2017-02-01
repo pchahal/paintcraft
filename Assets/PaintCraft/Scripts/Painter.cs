@@ -16,20 +16,23 @@ public class Painter : MonoBehaviour
 
     void Update()
     {
-
-        if (steve.isEditMode)
+        GameObject modal = GameObject.Find("ModalPanel");
+        if (!modal)
         {
-            if (!Input.GetMouseButton(0))
-                return;
 
-            CheckHit();
-        }
-        else if (Input.GetMouseButtonUp(0))
-        {
-            CheckHit();
-            steve.isEditMode = true;
-        }
+            if (steve.isEditMode)
+            {
+                if (!Input.GetMouseButton(0))
+                    return;
 
+                CheckHit();
+            }
+            else if (Input.GetMouseButtonUp(0))
+            {
+                CheckHit();
+                steve.isEditMode = true;
+            }
+        }
     }
 
     void CheckHit()
