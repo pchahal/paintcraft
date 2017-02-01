@@ -58,7 +58,7 @@ public class Skins : MonoBehaviour
 
     public void OnClickSkinButton(string filePath)
     {
-
+        Debug.Log(filePath);
         settings.CurrentSkinPath = filePath;
         SceneManager.LoadScene(1);
     }
