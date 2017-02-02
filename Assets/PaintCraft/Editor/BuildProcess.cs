@@ -1,6 +1,7 @@
 ﻿// C# example.
 using UnityEditor;
 using System.Diagnostics;
+using UnityEngine;
 
 public class ScriptBatch
 {
@@ -12,6 +13,17 @@ public class ScriptBatch
         string path = "/Users/par/Dropbox";
         string name = "/PaintCraft.apk";
         string[] levels = new string[] { "Assets/PaintCraft/Scenes/skins.unity", "Assets/PaintCraft/Scenes/main.unity" };
+        Settings settings = Resources.Load("Settings") as Settings;
+        settings.CurrentSkinPath = "";
+        settings.HasPurchasedIAP = false;
+        settings.HasSwiped = false;
+        settings.SkinCount = 0;
+        settings.swatchColors[0] = Color.red;
+        settings.swatchColors[1] = Color.green;
+        settings.swatchColors[2] = Color.blue;
+        settings.swatchColors[3] = Color.cyan;
+        settings.swatchColors[4] = Color.yellow;
+
 
 
         // Build player.

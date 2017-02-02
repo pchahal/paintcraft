@@ -37,6 +37,7 @@ public class Purchaser : MonoBehaviour, IStoreListener
     public Text savedToGalleryBody;
     public GameObject savedToGallery;
 
+
     void Start()
     {
         // If we haven't set up the Unity Purchasing reference
@@ -222,9 +223,12 @@ public class Purchaser : MonoBehaviour, IStoreListener
         {
             Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
             // TODO: The non-consumable item has been successfully purchased, grant this item to the player.
+            Settings settings = Resources.Load("Settings") as Settings;
+            settings.HasPurchasedIAP = true;
             savedToGalleryTitle.text = "Saved!!";
             savedToGalleryBody.text = "Skin may look fuzzy in photo app, due to zoom.  It will look correct when applied in Minecraft.";
             savedToGallery.SetActive(true);
+
         }
         // Or ... a subscription product has been purchased by this user.
         else if (String.Equals(args.purchasedProduct.definition.id, kProductIDSubscription, StringComparison.Ordinal))

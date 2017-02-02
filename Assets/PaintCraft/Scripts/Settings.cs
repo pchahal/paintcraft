@@ -8,5 +8,6 @@ public class Settings : ScriptableObject
     public string CurrentSkinPath;
     public int SkinCount;
     public bool HasSwiped;
+    public bool HasPurchasedIAP;
 
 }

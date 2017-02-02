@@ -103,7 +103,7 @@ public class Menu : MonoBehaviour
     {
         string fileName = "Skin" + settings.CurrentSkinPath;
 
-        if (PlayerPrefs.HasKey("Purchased"))
+        if (settings.HasPurchasedIAP)
         {
             NativeToolkit.SaveImage(stevePaintable.GetComponent<Steve>().GetCurrentSkinTexture(), fileName, "png");
         }
