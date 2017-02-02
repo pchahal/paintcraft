@@ -1,11 +1,4 @@
 
-
-remove app permissions
-Icon from Ella
-ScreenShots
-app store desccription
+editor skins not loading in main
 video
-create Google InApp purchase
-InApp PUrchases .99cents
-apple developer account
-iphone build test and upload
+apple developer account,iphone build test and upload
