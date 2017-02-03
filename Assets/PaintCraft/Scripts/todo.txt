@@ -1,4 +1,9 @@
-
+brush is filling whole face
+erase erasing whole face
+fill not working
+not saving new skin
+title bar disappears
+new skin is red not checker grey
 editor skins not loading in main
 video
 apple developer account,iphone build test and upload

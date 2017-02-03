@@ -12,6 +12,7 @@ public class Skins : MonoBehaviour
     void Start()
     {
         settings = Resources.Load("Settings") as Settings;
+        settings.CurrentSkinPath = "";
         textures = FileManager.Instance.GetAllFiles(Application.persistentDataPath, "*.png");
         Point point = GetGalleryPosition(textures.Length);
         Rect rect = transform.GetComponent<RectTransform>().rect;
