@@ -21,6 +21,7 @@ public class Menu : MonoBehaviour
     public GameObject inappPurchase;
     public GameObject savedToGallery;
     private Settings settings;
+
     void Start()
     {
         settings = Resources.Load("Settings") as Settings;
@@ -66,9 +67,7 @@ public class Menu : MonoBehaviour
             GameObject.Find("Part").GetComponent<Text>().enabled = false;
             colorSwatches.SetActive(false);
             stevePaintable.GetComponent<Steve>().SaveSkin();
-        }
-
-        else if (text.text == "SKINS")
+        } else if (text.text == "SKINS")
         {
             SceneManager.LoadScene(0);
         }
@@ -106,8 +105,7 @@ public class Menu : MonoBehaviour
         if (settings.HasPurchasedIAP)
         {
             NativeToolkit.SaveImage(stevePaintable.GetComponent<Steve>().GetCurrentSkinTexture(), fileName, "png");
-        }
-        else
+        } else
         {
             inappPurchase.SetActive(true);
         }
@@ -123,7 +121,8 @@ public class Menu : MonoBehaviour
     public void OnDeleteButton()
     {
         string path = settings.CurrentSkinPath;
-        File.Delete(path);
+        if (path != "")
+            File.Delete(path);
         SceneManager.LoadScene(0);
     }
 
