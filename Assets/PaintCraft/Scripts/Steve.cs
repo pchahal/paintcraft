@@ -5,12 +5,18 @@ using UnityEngine.UI;
 public enum BodyPart
 {
 
-    HEAD, HAT,
-    BODY, JACKET,
-    LEFTARM, LEFTSLEEVE,
-    RIGHTARM, RIGHTSLEEVE,
-    LEFTLEG, LEFTPANT,
-    RIGHTLEG, RIGHTPANT,
+    HEAD,
+    HAT,
+    BODY,
+    JACKET,
+    LEFTARM,
+    LEFTSLEEVE,
+    RIGHTARM,
+    RIGHTSLEEVE,
+    LEFTLEG,
+    LEFTPANT,
+    RIGHTLEG,
+    RIGHTPANT,
     NONE,
 }
 
@@ -18,13 +24,37 @@ static class SteveDict
 {
     public static Dictionary<string, BodyPart> bodyPartsDict = new Dictionary<string, BodyPart>()
     {
-        {"Head",            BodyPart.HEAD        }, {"Hat",             BodyPart.HAT         },
-        {"Body",           BodyPart.BODY         }, {"Jacket",           BodyPart.JACKET         },
-        {"Left Arm",        BodyPart.LEFTARM     },{"Left Sleeve",        BodyPart.LEFTSLEEVE     },
-        {"Right Arm",       BodyPart.RIGHTARM    },{"Right Sleeve",        BodyPart.RIGHTSLEEVE     },
-        {"Left Leg",        BodyPart.LEFTLEG     },{"Left Pant",        BodyPart.LEFTPANT     },
-        {"Right Leg",       BodyPart.RIGHTLEG    },{"Right Pant",        BodyPart.RIGHTPANT     },
-        {"Quad",            BodyPart.BODY        }
+        { "Head",            BodyPart.HEAD        },
+        {
+            "Hat",
+            BodyPart.HAT
+        },
+        { "Body",           BodyPart.BODY         },
+        {
+            "Jacket",
+            BodyPart.JACKET
+        },
+        { "Left Arm",        BodyPart.LEFTARM     },
+        {
+            "Left Sleeve",
+            BodyPart.LEFTSLEEVE
+        },
+        { "Right Arm",       BodyPart.RIGHTARM    },
+        {
+            "Right Sleeve",
+            BodyPart.RIGHTSLEEVE
+        },
+        { "Left Leg",        BodyPart.LEFTLEG     },
+        {
+            "Left Pant",
+            BodyPart.LEFTPANT
+        },
+        { "Right Leg",       BodyPart.RIGHTLEG    },
+        {
+            "Right Pant",
+            BodyPart.RIGHTPANT
+        },
+        { "Quad",            BodyPart.BODY        }
     };
 }
 
@@ -48,12 +78,13 @@ public class Steve : MonoBehaviour
     string filePath;
     [HideInInspector]
     public int bodyClothes;
-    private Settings settings;
+
 
     public int GetBodyClothes()
     {
         return bodyClothes;
     }
+
     public void SetBodyClothes(int value)
     {
         bodyClothes = value;
@@ -69,24 +100,25 @@ public class Steve : MonoBehaviour
 
     void Start()
     {
-        settings = Resources.Load("Settings") as Settings;
+   
+      
+        Debug.Log("steve.cs path=" + PlayerPrefs.GetString("CurrentSkinPath"));
         Texture2D defaultTexture = Resources.Load("DefaultSkin") as Texture2D;
         defaultColors = defaultTexture.GetPixels();
         for (int i = 0; i < defaultColors.Length; i++)
         {
-            defaultColors[i].a = 0;
+            defaultColors [i].a = 0;
         }
 
-        filePath = settings.CurrentSkinPath;
+        filePath = PlayerPrefs.GetString("CurrentSkinPath");
         if (filePath != "")
         {
             tex = FileManager.Instance.GetTextureFromPNG(filePath);
             mat.SetTexture("_MainTex", tex);
-        }
-        else
+        } else
         {
-            settings.SkinCount++;
-            filePath = Application.persistentDataPath + "/" + "Skin" + settings.SkinCount + ".png";
+            int skinCount = FileManager.Instance.GetAllFiles(Application.persistentDataPath, "*.png").Length + 1;
+            filePath = Application.persistentDataPath + "/" + "Skin" + skinCount + ".png";
             tex = new Texture2D(defaultTexture.width, defaultTexture.height, TextureFormat.RGBAHalf, false);
             tex.filterMode = FilterMode.Point;
             tex.SetPixels(defaultColors);
@@ -110,33 +142,27 @@ public class Steve : MonoBehaviour
         {
             currentBodyPart = transform.FindChild("Head");
             currentBodyPart.gameObject.SetActive(true);
-        }
-        else if (bodyPart == BodyPart.BODY || bodyPart == BodyPart.JACKET)
+        } else if (bodyPart == BodyPart.BODY || bodyPart == BodyPart.JACKET)
         {
             currentBodyPart = transform.FindChild("Body");
             currentBodyPart.gameObject.SetActive(true);
-        }
-        else if (bodyPart == BodyPart.RIGHTARM || bodyPart == BodyPart.RIGHTSLEEVE)
+        } else if (bodyPart == BodyPart.RIGHTARM || bodyPart == BodyPart.RIGHTSLEEVE)
         {
             currentBodyPart = transform.FindChild("Right Arm");
             currentBodyPart.gameObject.SetActive(true);
-        }
-        else if (bodyPart == BodyPart.LEFTARM || bodyPart == BodyPart.LEFTSLEEVE)
+        } else if (bodyPart == BodyPart.LEFTARM || bodyPart == BodyPart.LEFTSLEEVE)
         {
             currentBodyPart = transform.FindChild("Left Arm");
             currentBodyPart.gameObject.SetActive(true);
-        }
-        else if (bodyPart == BodyPart.RIGHTLEG || bodyPart == BodyPart.RIGHTPANT)
+        } else if (bodyPart == BodyPart.RIGHTLEG || bodyPart == BodyPart.RIGHTPANT)
         {
             currentBodyPart = transform.FindChild("Right Leg");
             currentBodyPart.gameObject.SetActive(true);
-        }
-        else if (bodyPart == BodyPart.LEFTLEG || bodyPart == BodyPart.LEFTPANT)
+        } else if (bodyPart == BodyPart.LEFTLEG || bodyPart == BodyPart.LEFTPANT)
         {
             currentBodyPart = transform.FindChild("Left Leg");
             currentBodyPart.gameObject.SetActive(true);
-        }
-        else
+        } else
         {
             isEditMode = false;
             currentBodyPart = null;
@@ -183,7 +209,7 @@ public class Steve : MonoBehaviour
         int x = (int)pixelUV.x;
         int y = (int)pixelUV.y;
 
-        Color currentColor = defaultColors[x * tex.width + y];
+        Color currentColor = defaultColors [x * tex.width + y];
         currentColor.a = 0;
         return currentColor;
     }
@@ -216,8 +242,7 @@ public class Steve : MonoBehaviour
                 return "Right Leg";
             else
                 return "";
-        }
-        else
+        } else
         {
             if (part == BodyPart.HEAD)
                 return "Hat";
@@ -235,13 +260,13 @@ public class Steve : MonoBehaviour
                 return "";
         }
     }
+
     public BodyPart GetCurrentBodyPart(BodyPart part)
     {
         if (bodyClothes == 0)
         {
             return part;
-        }
-        else
+        } else
         {
             if (part == BodyPart.HEAD)
                 return BodyPart.HAT;

@@ -8,11 +8,12 @@ public class Skins : MonoBehaviour
     private string[] textures;
     public GameObject buttonPrefab;
     public GameObject tapNewSkin;
-    private Settings settings;
+
     void Start()
     {
-        settings = Resources.Load("Settings") as Settings;
-        settings.CurrentSkinPath = "";
+        Debug.Log("persistantpath=" + Application.persistentDataPath);
+    
+        PlayerPrefs.SetString("CurrentSkinPath", "");
         textures = FileManager.Instance.GetAllFiles(Application.persistentDataPath, "*.png");
         Point point = GetGalleryPosition(textures.Length);
         Rect rect = transform.GetComponent<RectTransform>().rect;
@@ -37,7 +38,11 @@ public class Skins : MonoBehaviour
             button.GetComponent<RectTransform>().localPosition = new Vector3(position.x, position.y, button.transform.position.z);
             button.name = tex;
             button.GetComponent<Image>().sprite = FileManager.Instance.GetSpriteFromPNG(tex, new Rect(8, 48, 8, 8));
-            button.GetComponent<Button>().onClick.AddListener(delegate { OnClickSkinButton(tex); });
+            button.GetComponent<Button>().onClick.AddListener(delegate
+            {
+                OnClickSkinButton(tex);
+            });
+            Debug.Log(tex);
             i++;
 
         }
@@ -59,8 +64,8 @@ public class Skins : MonoBehaviour
 
     public void OnClickSkinButton(string filePath)
     {
-        Debug.Log(filePath);
-        settings.CurrentSkinPath = filePath;
+        Debug.Log("skins.cs onclickbutton=" + filePath);
+        PlayerPrefs.SetString("CurrentSkinPath", filePath);
         SceneManager.LoadScene(1);
     }
 }

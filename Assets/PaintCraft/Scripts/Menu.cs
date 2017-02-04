@@ -100,7 +100,8 @@ public class Menu : MonoBehaviour
 
     public void OnShareButton()
     {
-        string fileName = "Skin" + settings.CurrentSkinPath;
+        string fileName = PlayerPrefs.GetString("CurrentSkinPath");
+        fileName = System.IO.Path.GetFileNameWithoutExtension(fileName); 
 
         if (settings.HasPurchasedIAP)
         {
@@ -120,7 +121,7 @@ public class Menu : MonoBehaviour
 
     public void OnDeleteButton()
     {
-        string path = settings.CurrentSkinPath;
+        string path = PlayerPrefs.GetString("CurrentSkinPath");
         if (path != "")
             File.Delete(path);
         SceneManager.LoadScene(0);
