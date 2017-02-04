@@ -27,7 +27,7 @@ public class Hints : MonoBehaviour
 
         settings = Resources.Load("Settings") as Settings;
         hasSwiped = settings.HasSwiped;
-        hasSwiped = false;
+
         if (!hasSwiped)
         {
 

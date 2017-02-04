@@ -98,16 +98,15 @@ public class Steve : MonoBehaviour
 
     public bool isEditMode { get; set; }
 
+
     void Start()
     {
-   
-      
         Debug.Log("steve.cs path=" + PlayerPrefs.GetString("CurrentSkinPath"));
         Texture2D defaultTexture = Resources.Load("DefaultSkin") as Texture2D;
         defaultColors = defaultTexture.GetPixels();
         for (int i = 0; i < defaultColors.Length; i++)
         {
-            defaultColors [i].a = 0;
+            defaultColors[i].a = 0;
         }
 
         filePath = PlayerPrefs.GetString("CurrentSkinPath");
@@ -115,7 +114,8 @@ public class Steve : MonoBehaviour
         {
             tex = FileManager.Instance.GetTextureFromPNG(filePath);
             mat.SetTexture("_MainTex", tex);
-        } else
+        }
+        else
         {
             int skinCount = FileManager.Instance.GetAllFiles(Application.persistentDataPath, "*.png").Length + 1;
             filePath = Application.persistentDataPath + "/" + "Skin" + skinCount + ".png";
@@ -142,27 +142,33 @@ public class Steve : MonoBehaviour
         {
             currentBodyPart = transform.FindChild("Head");
             currentBodyPart.gameObject.SetActive(true);
-        } else if (bodyPart == BodyPart.BODY || bodyPart == BodyPart.JACKET)
+        }
+        else if (bodyPart == BodyPart.BODY || bodyPart == BodyPart.JACKET)
         {
             currentBodyPart = transform.FindChild("Body");
             currentBodyPart.gameObject.SetActive(true);
-        } else if (bodyPart == BodyPart.RIGHTARM || bodyPart == BodyPart.RIGHTSLEEVE)
+        }
+        else if (bodyPart == BodyPart.RIGHTARM || bodyPart == BodyPart.RIGHTSLEEVE)
         {
             currentBodyPart = transform.FindChild("Right Arm");
             currentBodyPart.gameObject.SetActive(true);
-        } else if (bodyPart == BodyPart.LEFTARM || bodyPart == BodyPart.LEFTSLEEVE)
+        }
+        else if (bodyPart == BodyPart.LEFTARM || bodyPart == BodyPart.LEFTSLEEVE)
         {
             currentBodyPart = transform.FindChild("Left Arm");
             currentBodyPart.gameObject.SetActive(true);
-        } else if (bodyPart == BodyPart.RIGHTLEG || bodyPart == BodyPart.RIGHTPANT)
+        }
+        else if (bodyPart == BodyPart.RIGHTLEG || bodyPart == BodyPart.RIGHTPANT)
         {
             currentBodyPart = transform.FindChild("Right Leg");
             currentBodyPart.gameObject.SetActive(true);
-        } else if (bodyPart == BodyPart.LEFTLEG || bodyPart == BodyPart.LEFTPANT)
+        }
+        else if (bodyPart == BodyPart.LEFTLEG || bodyPart == BodyPart.LEFTPANT)
         {
             currentBodyPart = transform.FindChild("Left Leg");
             currentBodyPart.gameObject.SetActive(true);
-        } else
+        }
+        else
         {
             isEditMode = false;
             currentBodyPart = null;
@@ -209,7 +215,7 @@ public class Steve : MonoBehaviour
         int x = (int)pixelUV.x;
         int y = (int)pixelUV.y;
 
-        Color currentColor = defaultColors [x * tex.width + y];
+        Color currentColor = defaultColors[x * tex.width + y];
         currentColor.a = 0;
         return currentColor;
     }
@@ -242,7 +248,8 @@ public class Steve : MonoBehaviour
                 return "Right Leg";
             else
                 return "";
-        } else
+        }
+        else
         {
             if (part == BodyPart.HEAD)
                 return "Hat";
@@ -266,7 +273,8 @@ public class Steve : MonoBehaviour
         if (bodyClothes == 0)
         {
             return part;
-        } else
+        }
+        else
         {
             if (part == BodyPart.HEAD)
                 return BodyPart.HAT;
