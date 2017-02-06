@@ -4,23 +4,25 @@ using UnityEngine;
 using UnityEngine.Purchasing;
 using UnityEngine.UI;
 
-// Placing the Purchaser class in the CompleteProject namespace allows it to interact with ScoreManager, 
+// Placing the Purchaser class in the CompleteProject namespace allows it to interact with ScoreManager,
 // one of the existing Survival Shooter scripts.
 
 // Deriving the Purchaser class from IStoreListener enables it to receive messages from Unity Purchasing.
 public class Purchaser : MonoBehaviour, IStoreListener
 {
-    private static IStoreController m_StoreController;          // The Unity Purchasing system.
-    private static IExtensionProvider m_StoreExtensionProvider; // The store-specific Purchasing subsystems.
+    private static IStoreController m_StoreController;
+    // The Unity Purchasing system.
+    private static IExtensionProvider m_StoreExtensionProvider;
+    // The store-specific Purchasing subsystems.
 
-    // Product identifiers for all products capable of being purchased: 
-    // "convenience" general identifiers for use with Purchasing, and their store-specific identifier 
-    // counterparts for use with and outside of Unity Purchasing. Define store-specific identifiers 
+    // Product identifiers for all products capable of being purchased:
+    // "convenience" general identifiers for use with Purchasing, and their store-specific identifier
+    // counterparts for use with and outside of Unity Purchasing. Define store-specific identifiers
     // also on each platform's publisher dashboard (iTunes Connect, Google Play Developer Console, etc.)
 
     // General product identifiers for the consumable, non-consumable, and subscription products.
-    // Use these handles in the code to reference which product to purchase. Also use these values 
-    // when defining the Product Identifiers on the store. Except, for illustration purposes, the 
+    // Use these handles in the code to reference which product to purchase. Also use these values
+    // when defining the Product Identifiers on the store. Except, for illustration purposes, the
     // kProductIDSubscription - it has custom Apple and Google identifiers. We declare their store-
     // specific mapping to Unity Purchasing's AddProduct, below.
     public static string kProductIDConsumable = "consumable";
@@ -148,7 +150,7 @@ public class Purchaser : MonoBehaviour, IStoreListener
     }
 
 
-    // Restore purchases previously made by this customer. Some platforms automatically restore purchases, like Google. 
+    // Restore purchases previously made by this customer. Some platforms automatically restore purchases, like Google.
     // Apple currently requires explicit purchase restoration for IAP, conditionally displaying a password prompt.
     public void RestorePurchases()
     {
@@ -187,7 +189,7 @@ public class Purchaser : MonoBehaviour, IStoreListener
     }
 
 
-    //  
+    //
     // --- IStoreListener
     //
 
@@ -212,6 +214,7 @@ public class Purchaser : MonoBehaviour, IStoreListener
 
     public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs args)
     {
+        Debug.Log("IAP " + args);
         // A consumable product has been purchased by this user.
         if (String.Equals(args.purchasedProduct.definition.id, kProductIDConsumable, StringComparison.Ordinal))
         {
