@@ -18,13 +18,13 @@ public class ScriptBatch
             "Assets/PaintCraft/Scenes/main.unity"
         };
         Settings settings = Resources.Load("Settings") as Settings;
-        settings.HasPurchasedIAP = false;
+        settings.HasPurchasedIAP = true;
         settings.HasSwiped = false;
-        settings.swatchColors [0] = Color.red;
-        settings.swatchColors [1] = Color.green;
-        settings.swatchColors [2] = Color.blue;
-        settings.swatchColors [3] = Color.cyan;
-        settings.swatchColors [4] = Color.yellow;
+        settings.swatchColors[0] = Color.red;
+        settings.swatchColors[1] = Color.green;
+        settings.swatchColors[2] = Color.blue;
+        settings.swatchColors[3] = Color.cyan;
+        settings.swatchColors[4] = Color.yellow;
 
 
 
@@ -39,5 +39,20 @@ public class ScriptBatch
         // proc.StartInfo.FileName = path + "BuiltGame.exe";
         // proc.Start();
     }
-        
+
+
+    [InitializeOnLoad]
+    public class PreloadSigningAlias
+    {
+
+        static PreloadSigningAlias()
+        {
+            PlayerSettings.Android.keystorePass = "prelude99";
+            PlayerSettings.Android.keyaliasName = "paintcraft";
+            PlayerSettings.Android.keyaliasPass = "prelude99";
+        }
+
+
+    }
+
 }

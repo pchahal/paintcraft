@@ -67,7 +67,8 @@ public class Menu : MonoBehaviour
             GameObject.Find("Part").GetComponent<Text>().enabled = false;
             colorSwatches.SetActive(false);
             stevePaintable.GetComponent<Steve>().SaveSkin();
-        } else if (text.text == "SKINS")
+        }
+        else if (text.text == "SKINS")
         {
             SceneManager.LoadScene(0);
         }
@@ -101,12 +102,13 @@ public class Menu : MonoBehaviour
     public void OnShareButton()
     {
         string fileName = PlayerPrefs.GetString("CurrentSkinPath");
-        fileName = System.IO.Path.GetFileNameWithoutExtension(fileName); 
+        fileName = System.IO.Path.GetFileNameWithoutExtension(fileName);
 
         if (settings.HasPurchasedIAP)
         {
             NativeToolkit.SaveImage(stevePaintable.GetComponent<Steve>().GetCurrentSkinTexture(), fileName, "png");
-        } else
+        }
+        else
         {
             inappPurchase.SetActive(true);
         }
@@ -115,6 +117,8 @@ public class Menu : MonoBehaviour
     void ImageSaved(string filename)
     {
         savedToGallery.SetActive(true);
+        savedToGallery.transform.Find("BodySaved").gameObject.SetActive(true);
+        savedToGallery.transform.Find("BodyFailed").gameObject.SetActive(false);
     }
 
 

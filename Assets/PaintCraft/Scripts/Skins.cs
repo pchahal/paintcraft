@@ -11,13 +11,14 @@ public class Skins : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("persistantpath=" + Application.persistentDataPath);
-    
+
+
         PlayerPrefs.SetString("CurrentSkinPath", "");
         textures = FileManager.Instance.GetAllFiles(Application.persistentDataPath, "*.png");
         Point point = GetGalleryPosition(textures.Length);
         Rect rect = transform.GetComponent<RectTransform>().rect;
-        int height = Mathf.Abs(point.y) + 125;
+        int numRows = (1 + textures.Length) / 3;
+        int height = numRows * 125 + numRows * 25;// Mathf.Abs(point.y);
         transform.GetComponent<RectTransform>().sizeDelta = new Vector2(rect.width, height);
         if (textures.Length > 0)
             tapNewSkin.SetActive(false);
@@ -42,7 +43,6 @@ public class Skins : MonoBehaviour
             {
                 OnClickSkinButton(tex);
             });
-            Debug.Log(tex);
             i++;
 
         }

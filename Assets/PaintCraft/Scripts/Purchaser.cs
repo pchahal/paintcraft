@@ -28,13 +28,14 @@ public class Purchaser : MonoBehaviour, IStoreListener
     public static string kProductIDSubscription = "subscription";
 
     // Apple App Store-specific product identifier for the subscription product.
-    private static string kProductNameAppleSubscription = "com.unity3d.subscription.new";
+    // private static string kProductNameAppleSubscription = "com.unity3d.subscription.new";
 
     // Google Play Store-specific product identifier subscription product.
-    private static string kProductNameGooglePlaySubscription = "com.unity3d.subscription.original";
+    //private static string kProductNameGooglePlaySubscription = "com.unity3d.subscription.original";
 
     public Text savedToGalleryTitle;
-    public Text savedToGalleryBody;
+    public GameObject savedToGalleryBody;
+    public GameObject failedSavedToGalleryBody;
     public GameObject savedToGallery;
 
 
@@ -62,17 +63,17 @@ public class Purchaser : MonoBehaviour, IStoreListener
 
         // Add a product to sell / restore by way of its identifier, associating the general identifier
         // with its store-specific identifiers.
-        builder.AddProduct(kProductIDConsumable, ProductType.Consumable);
+        //  builder.AddProduct(kProductIDConsumable, ProductType.Consumable);
         // Continue adding the non-consumable product.
         builder.AddProduct(kProductIDNonConsumable, ProductType.NonConsumable);
         // And finish adding the subscription product. Notice this uses store-specific IDs, illustrating
         // if the Product ID was configured differently between Apple and Google stores. Also note that
         // one uses the general kProductIDSubscription handle inside the game - the store-specific IDs 
         // must only be referenced here. 
-        builder.AddProduct(kProductIDSubscription, ProductType.Subscription, new IDs(){
-                { kProductNameAppleSubscription, AppleAppStore.Name },
-                { kProductNameGooglePlaySubscription, GooglePlay.Name },
-            });
+        // builder.AddProduct(kProductIDSubscription, ProductType.Subscription, new IDs(){
+        //        { kProductNameAppleSubscription, AppleAppStore.Name },
+        //        { kProductNameGooglePlaySubscription, GooglePlay.Name },
+        //   });
 
         // Kick off the remainder of the set-up with an asynchrounous call, passing the configuration 
         // and this class' instance. Expect a response either in OnInitialized or OnInitializeFailed.
@@ -226,7 +227,8 @@ public class Purchaser : MonoBehaviour, IStoreListener
             Settings settings = Resources.Load("Settings") as Settings;
             settings.HasPurchasedIAP = true;
             savedToGalleryTitle.text = "Saved!!";
-            savedToGalleryBody.text = "Skin may look fuzzy in photo app, due to zoom.  It will look correct when applied in Minecraft.";
+            savedToGalleryBody.SetActive(true);
+            failedSavedToGalleryBody.SetActive(false);
             savedToGallery.SetActive(true);
 
         }
@@ -256,6 +258,7 @@ public class Purchaser : MonoBehaviour, IStoreListener
         Debug.Log(string.Format("OnPurchaseFailed: FAIL. Product: '{0}', PurchaseFailureReason: {1}", product.definition.storeSpecificId, failureReason));
         savedToGallery.SetActive(true);
         savedToGalleryTitle.text = "Purchase Failed!";
-        savedToGalleryBody.text = "Could not complete purchase.";
+        savedToGalleryBody.SetActive(false);
+        failedSavedToGalleryBody.SetActive(true);
     }
 }

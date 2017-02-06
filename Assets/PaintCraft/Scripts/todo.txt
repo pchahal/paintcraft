@@ -1,4 +1,9 @@
-hints always showing each skin load
 
-video
+new apk without phone permision
+test on galaxy,sukhs,karens androids
 apple developer account,iphone build test and upload
+
+
+DONE rebuy
+DONE scroll bar make longer for many skins
+DONE test pocket edition skins
