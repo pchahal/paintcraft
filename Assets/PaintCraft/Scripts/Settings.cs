@@ -7,7 +7,16 @@ public class Settings : ScriptableObject
 
     public string CurrentSkinPath;
     public bool HasSwiped;
-    public bool HasPurchasedIAP;
+    private bool hasPurchasedIAP;
 
+    public bool HasPurchasedIAP
+    {
+        get { return hasPurchasedIAP; }
+        set
+        {
+            hasPurchasedIAP = value;
+            UnityEditor.EditorUtility.SetDirty(this);
+        }
+
+    }
 }
-
