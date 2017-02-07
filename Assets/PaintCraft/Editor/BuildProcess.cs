@@ -44,15 +44,17 @@ public class ScriptBatch
     [InitializeOnLoad]
     public class PreloadSigningAlias
     {
-
         static PreloadSigningAlias()
         {
             PlayerSettings.Android.keystorePass = "prelude99";
             PlayerSettings.Android.keyaliasName = "paintcraft";
             PlayerSettings.Android.keyaliasPass = "prelude99";
         }
-
-
     }
 
+    [MenuItem("PaintCraft/Delete All Prefs")]
+    public static void DeleteAllPrefs()
+    {
+        PlayerPrefs.DeleteAll();
+    }
 }
