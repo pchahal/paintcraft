@@ -15,7 +15,7 @@ public class Hints : MonoBehaviour
 
     bool hasSwiped;
     Text swipeText;
-    Settings settings;
+
     public void Start()
     {
 
@@ -25,10 +25,7 @@ public class Hints : MonoBehaviour
         swipeText = GameObject.Find("SwipeText").GetComponent<Text>();
         hint = GetComponent<Image>();
 
-        settings = Resources.Load("Settings") as Settings;
-        hasSwiped = settings.HasSwiped;
-
-        if (!hasSwiped)
+        if (PlayerPrefs.GetInt("HasSwiped") == 0)
         {
 
             InvokeRepeating("ShowSwipeHint", 5, lerpTime);
@@ -41,8 +38,8 @@ public class Hints : MonoBehaviour
         hint.enabled = true; ;
 
         swipeText.enabled = true;
-        hasSwiped = settings.HasSwiped;
-        if (hasSwiped)
+
+        if (PlayerPrefs.GetInt("HasSwiped") == 1)
             HideSwipeHint();
     }
 

@@ -227,8 +227,8 @@ public class Purchaser : MonoBehaviour, IStoreListener
         {
             Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
             // TODO: The non-consumable item has been successfully purchased, grant this item to the player.
-            Settings settings = Resources.Load("Settings") as Settings;
-            settings.HasPurchasedIAP = true;
+
+            PlayerPrefs.SetInt("HasPurchasedIAP", 1);
             savedToGalleryTitle.text = "Saved!!";
             savedToGalleryBody.SetActive(true);
             failedSavedToGalleryBody.SetActive(false);

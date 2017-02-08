@@ -1,11 +1,6 @@
 
-null reference on buy
-asking for fine location    
+
+
 test on galaxy,sukhs,karens androids
 apple developer account,iphone build test and upload
 
-
-DONE rebuy
-DONE scroll bar make longer for many skins
-DONE test pocket edition skins
-DONE new apk without phone permision

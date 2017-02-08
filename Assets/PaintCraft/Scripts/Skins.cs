@@ -15,10 +15,10 @@ public class Skins : MonoBehaviour
 
         PlayerPrefs.SetString("CurrentSkinPath", "");
         textures = FileManager.Instance.GetAllFiles(Application.persistentDataPath, "*.png");
-        Point point = GetGalleryPosition(textures.Length);
+
         Rect rect = transform.GetComponent<RectTransform>().rect;
         int numRows = (1 + textures.Length) / 3;
-        int height = numRows * 125 + numRows * 25;// Mathf.Abs(point.y);
+        int height = numRows * 125 + numRows * 25;
         transform.GetComponent<RectTransform>().sizeDelta = new Vector2(rect.width, height);
         if (textures.Length > 0)
             tapNewSkin.SetActive(false);

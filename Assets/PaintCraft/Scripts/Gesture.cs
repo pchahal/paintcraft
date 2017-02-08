@@ -7,13 +7,13 @@ public class Gesture : MonoBehaviour
     private Vector3 mouseDown;
     public Steve steve;
     Painter painter;
-    Settings settings;
+
 
 
     void Start()
     {
         painter = Camera.main.GetComponent<Painter>();
-        settings = Resources.Load("Settings") as Settings;
+
     }
 
     void OnMouseDrag()
@@ -23,7 +23,8 @@ public class Gesture : MonoBehaviour
         if (Vector2.Distance(Input.mousePosition, mouseDown) > Mathf.Abs(5))
             steve.RotateBodyPart(rotation);
         OnMouseDown();
-        settings.HasSwiped = true;
+
+        PlayerPrefs.SetInt("HasSwiped", 1);
     }
 
 

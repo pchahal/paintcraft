@@ -101,7 +101,7 @@ public class Steve : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("steve.cs path=" + PlayerPrefs.GetString("CurrentSkinPath"));
+       
         Texture2D defaultTexture = Resources.Load("DefaultSkin") as Texture2D;
         defaultColors = defaultTexture.GetPixels();
         for (int i = 0; i < defaultColors.Length; i++)
