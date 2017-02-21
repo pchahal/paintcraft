@@ -1,7 +1,0 @@
-
-
-
-
-On iOS if access to the Camera Roll has not been enabled, the file path passed back will be "DENIED".
-apple developer account,iphone build test and upload
-
