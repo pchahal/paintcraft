@@ -47,6 +47,7 @@ public class Menu : MonoBehaviour
         shareButton.SetActive(false);
         swipeHintUp.SetActive(true);
         swipeHintRight.SetActive(true);
+
     }
 
     public void OnBackButton()
@@ -75,8 +76,10 @@ public class Menu : MonoBehaviour
         shareButton.SetActive(true);
         stevePaintable.gameObject.SetActive(true);
         steveRigable.gameObject.SetActive(false);
-        swipeHintUp.SetActive(true);
-        swipeHintRight.SetActive(true);
+        swipeHintUp.SetActive(false);
+        swipeHintRight.SetActive(false);
+
+
 
     }
 
@@ -114,6 +117,7 @@ public class Menu : MonoBehaviour
 
     void ImageSaved(string filename)
     {
+        Debug.Log("SAVED " + filename);
         savedToGallery.SetActive(true);
         savedToGallery.transform.Find("BodySaved").gameObject.SetActive(true);
         savedToGallery.transform.Find("BodyFailed").gameObject.SetActive(false);

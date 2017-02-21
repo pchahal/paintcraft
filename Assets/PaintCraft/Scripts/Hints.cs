@@ -14,7 +14,7 @@ public class Hints : MonoBehaviour
     Image hint;
 
     bool hasSwiped;
-    Text swipeText;
+
 
     public void Start()
     {
@@ -22,7 +22,7 @@ public class Hints : MonoBehaviour
         startPos = transform.position;
         endPos = transform.position + axis * moveDistance;
 
-        swipeText = GameObject.Find("SwipeText").GetComponent<Text>();
+
         hint = GetComponent<Image>();
 
         if (PlayerPrefs.GetInt("HasSwiped") == 0)
@@ -37,7 +37,7 @@ public class Hints : MonoBehaviour
         currentLerpTime = 0;
         hint.enabled = true; ;
 
-        swipeText.enabled = true;
+
 
         if (PlayerPrefs.GetInt("HasSwiped") == 1)
             HideSwipeHint();
@@ -48,7 +48,6 @@ public class Hints : MonoBehaviour
         CancelInvoke();
         hint.enabled = false;
 
-        swipeText.enabled = false;
         transform.gameObject.SetActive(false);
     }
 
